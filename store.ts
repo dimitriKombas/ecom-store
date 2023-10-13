@@ -9,7 +9,7 @@ type CartState = {
     toggleCart: () => void
     // clearCart: () => void
     addProduct: (item: AddCartType) => void
-    // removeProduct: (item: AddCartType) => void
+    removeProduct: (item: AddCartType) => void
     // paymentIntent: string
     // onCheckout: string
     // setPaymentIntent: (val:string) => void
@@ -35,7 +35,7 @@ export const useCartStore = create<CartState>()(
                 if(existingItem){
                     const updatedCart = state.cart.map((cartItem) => {
                         if(cartItem.id === item.id){
-                            return {...cartItem, quantity: cartItem.quantity + 1}
+                            return {...cartItem, quantity: cartItem.quantity as number + 1}
                         }
                         return cartItem
                     })
@@ -45,6 +45,25 @@ export const useCartStore = create<CartState>()(
                     return {cart: [...state.cart, { ...item, quantity: 1 }]}
                 }
             }),
+            removeProduct: (item) => {
+                set((state) => {
+                    const existingItem = state.cart.find((cartItem) => cartItem.id === item.id)
+                    // Check if the item exists and remove quantity
+                    if(existingItem && existingItem.quantity! > 1){
+                        const updatedCart = state.cart.map((cartItem) => {
+                            if(cartItem.id === item.id){
+                                return {...cartItem, quantity: cartItem.quantity! -1}
+                            }
+                            return cartItem
+                        })
+                        return {cart: updatedCart}
+                    } else {
+                        // Remove item from cart
+                        const filteredCard = state.cart.filter((cartItem) => cartItem.id !== item.id)
+                        return {cart: filteredCard}
+                    }
+                })
+            }
         }),
         // Name for the persisted store in local storage or elsewhere.
         {name: "cart-store"}
