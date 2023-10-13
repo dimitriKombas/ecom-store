@@ -10,11 +10,10 @@ type CartState = {
     // clearCart: () => void
     addProduct: (item: AddCartType) => void
     removeProduct: (item: AddCartType) => void
-    // paymentIntent: string
-    // onCheckout: string
-    // setPaymentIntent: (val:string) => void
-    // setCheckout: (val:string) => void
-
+    paymentIntent: string
+    onCheckout: string
+    setPaymentIntent: (val:string) => void
+    setCheckout: (val:string) => void
 }
 
 // Creating the cart store using zustand and making it persistent.
@@ -25,6 +24,8 @@ export const useCartStore = create<CartState>()(
             cart: [],
             // Cart is initially closed.
             isOpen: false,
+            paymentIntent: "",
+            onCheckout: "cart",
             // Function to toggle the cart's open/close state.
             toggleCart: () => set((state) => ({ isOpen: !state.isOpen })), 
             // Function to add a product to the cart.
@@ -63,7 +64,9 @@ export const useCartStore = create<CartState>()(
                         return {cart: filteredCard}
                     }
                 })
-            }
+            },
+            setPaymentIntent: (val) => set((state) => ({paymentIntent: val})),
+            setCheckout: (val) => set(state) => ({onCheckout: val})),
         }),
         // Name for the persisted store in local storage or elsewhere.
         {name: "cart-store"}
