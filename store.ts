@@ -66,7 +66,7 @@ export const useCartStore = create<CartState>()(
                 })
             },
             setPaymentIntent: (val) => set((state) => ({paymentIntent: val})),
-            setCheckout: (val) => set(state) => ({onCheckout: val})),
+            setCheckout: (val) => set((state) => ({onCheckout: val})),
         }),
         // Name for the persisted store in local storage or elsewhere.
         {name: "cart-store"}
