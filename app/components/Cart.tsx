@@ -13,15 +13,21 @@ export default function Cart() {
         return acc + item.unit_amount! * item.quantity!
     }, 0)
     return (
-
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => cartStore.toggleCart()} className="fixed w-full h-screen left-0 top-0 bg-black/25">
+            onClick={() => cartStore.toggleCart()}
+            className="fixed w-full h-screen left-0 top-0 bg-black/25">
+
+            {/* Cart */}
             <motion.div layout
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white absolute right-0 top-0 w-1/4 h-screen p-12 overflow-y-scroll text-gray-700">
+                className="bg-white absolute right-0 top-0 h-screen p-12 overflow-y-scroll text-gray-700 w-full lg:w-2/5">
+                <button
+                    onClick={() => cartStore.toggleCart()}
+                    className="text-sm font-bold pb-12"
+                >Back to store 🏃🏼‍♂️</button>
                 <h1>
                     {cartStore.cart.length === 0 ? "Fill up your shopping list!" : "Here's your shopping list! 🥳"}
                 </h1>
