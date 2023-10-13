@@ -1,43 +1,52 @@
 import {create} from 'zustand'
 import {persist} from 'zustand/middleware'
+import { AddCartType } from './app/types/AddCartType'
 
-type CartItem = {
-    name: string,
-    id: string,
-    images?: string[],
-    description?: string,
-    unit_amount: number,
-    quantity: number
-}
-
+// Type definition for the entire cart state.
 type CartState = {
     isOpen: boolean
-    cart: CartItem[]
+    cart: AddCartType[]
     toggleCart: () => void
-    addProduct: (item: CartItem) => void
+    // clearCart: () => void
+    addProduct: (item: AddCartType) => void
+    // removeProduct: (item: AddCartType) => void
+    // paymentIntent: string
+    // onCheckout: string
+    // setPaymentIntent: (val:string) => void
+    // setCheckout: (val:string) => void
+
 }
 
+// Creating the cart store using zustand and making it persistent.
 export const useCartStore = create<CartState>()(
     persist(
         (set) => ({
+            // Initial empty cart.
             cart: [],
+            // Cart is initially closed.
             isOpen: false,
+            // Function to toggle the cart's open/close state.
             toggleCart: () => set((state) => ({ isOpen: !state.isOpen })), 
-            addProduct: (item) => ((state) => {
+            // Function to add a product to the cart.
+            addProduct: (item) => set((state) => {
+                // Check if the item already exists in the cart.
                 const existingItem = state.cart.find((cartItem) => cartItem.id === item.id)
+                // If the item exists, update its quantity.
                 if(existingItem){
-                    const updateCart = state.cart.map((cartItem) => {
-                        if(cartItem === item.id){
+                    const updatedCart = state.cart.map((cartItem) => {
+                        if(cartItem.id === item.id){
                             return {...cartItem, quantity: cartItem.quantity + 1}
                         }
                         return cartItem
                     })
-                    return {cart: updateCart}
+                    return {cart: updatedCart}
                 } else {
-                    return {cart: [...state.cart, { ...item, quantity:1 }]}
+                    // If the item doesn't exist, add it to the cart with a quantity of 1.
+                    return {cart: [...state.cart, { ...item, quantity: 1 }]}
                 }
             }),
         }),
+        // Name for the persisted store in local storage or elsewhere.
         {name: "cart-store"}
     )
 )
