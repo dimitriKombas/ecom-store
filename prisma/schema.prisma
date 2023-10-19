@@ -1,12 +1,28 @@
+// Purpose: Specifies the database connection details.
+// Attributes:
+// provider: The database engine being used. In this case, it's PostgreSQL.
+// url: The connection string for the database. The value is retrieved from an environment variable named DATABASE_URL.
 datasource db {
     provider = "postgresql"
     url      = env("DATABASE_URL")
 }
 
+// Purpose: Defines how Prisma should generate the client.
+// Attributes:
+// provider: The Prisma client generator to use. In this instance, the JavaScript version of the Prisma Client is specified.
 generator client {
     provider = "prisma-client-js"
 }
 
+// Purpose: Represents third-party accounts associated with a user (e.g., Google, Facebook).
+// Fields:
+// id: A unique identifier for the account.
+// userId: The ID of the associated user.
+// type: The type or category of the account.
+// provider: Name of the third-party provider.
+// providerAccountId: Account ID provided by the third-party provider.
+// refresh_token, access_token, etc.: Tokens associated with the third-party account, useful for OAuth.
+// user: A relation field linking the account to its respective user.
 model Account {
     id                String  @id @default(cuid())
     userId            String
@@ -26,6 +42,13 @@ model Account {
     @@unique([provider, providerAccountId])
 }
 
+// Purpose: Represents a user's session in the system.
+// Fields:
+// id: Unique session identifier.
+// sessionToken: A unique token for the session.
+// userId: The ID of the associated user.
+// expires: The expiration date and time of the session.
+// user: A relation field linking the session to its respective user.
 model Session {
     id           String   @id @default(cuid())
     sessionToken String   @unique
@@ -34,6 +57,15 @@ model Session {
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+// Purpose: Represents a user in the system.
+// Fields:
+// id: Unique user identifier.
+// name: Name of the user.
+// email: Email address of the user.
+// emailVerified: Timestamp of when the user's email was verified.
+// image: URL or path to the user's profile image.
+// stripeCustomerId: The associated Stripe customer ID, if the system integrates with Stripe for payments.
+// Relations to Account, Session, and Order indicating associated accounts, sessions, and orders for the user.
 model User {
     id               String    @id @default(cuid())
     name             String?
@@ -43,8 +75,41 @@ model User {
     accounts         Account[]
     sessions         Session[]
     stripeCustomerId String?
+    orders           Order[]
 }
 
+// Purpose: Represents an order placed by a user.
+// Fields:
+// id: Unique order identifier.
+// user: A relation field linking the order to its respective user.
+// userId: The ID of the associated user.
+model Order {
+    id              String    @id @default(cuid())
+    user            User      @relation(fields: [userId], references: [id])
+    userId          String
+    amount          Float
+    currency        String
+    status          String
+    createdDate     DateTime  @default(now())
+    paymentIntentID String?   @unique
+    products        Product[]
+}
+
+model Product {
+    id          String  @id @default(cuid())
+    name        String
+    description String?
+    unit_amount Float
+    image       String?
+    quantity    Float   @default(0)
+    orders      Order[]
+}
+
+// Purpose: Represents a token used for various verification processes (e.g., email verification).
+// Fields:
+// identifier: A value like an email or username associated with the token.
+// token: The unique verification token.
+// expires: The expiration date and time of the token.
 model VerificationToken {
     identifier String
     token      String   @unique
