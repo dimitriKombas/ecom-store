@@ -46,7 +46,7 @@ export default function Checkout() {
     // Return some JSX, even if it's just a placeholder for now.
     return (
         <div>
-            {!clientSecret && (
+            {clientSecret && (
                 <div>
                     <Elements options={options} stripe={stripePromise}>
                         <CheckoutForm clientSecret={clientSecret} />
