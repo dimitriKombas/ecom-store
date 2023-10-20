@@ -16,7 +16,7 @@ export default function Nav({ user }: Session) {
         <nav
             className="flex justify-between items-center py-12">
             <Link href={"/"}>
-                <h1>Styled</h1>
+                <h1 className="bg-gray-800 text-white py-2 px-4 rounded-md">Home Page</h1>
             </Link>
             <ul className="flex items-center gap-12">
                 {/* Toggle the cart */}
