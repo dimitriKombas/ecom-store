@@ -2,8 +2,9 @@
 import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js"
 import { useCartStore } from "@/store"
-import { useState, useEffect, useReducer } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import CheckoutForm from "./CheckoutForm"
 // import { signIn } from 'next-auth/react';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
@@ -34,11 +35,24 @@ export default function Checkout() {
         });
     }, []);
 
+    const options: StripeElementsOptions = {
+        clientSecret,
+        appearance: {
+            theme: "night",
+            labels: "floating",
+        }
+    }
+
     // Return some JSX, even if it's just a placeholder for now.
     return (
         <div>
-            {/* You can add your stripe form or any other JSX here */}
-            Checkout Component
+            {!clientSecret && (
+                <div>
+                    <Elements options={options} stripe={stripePromise}>
+                        <CheckoutForm clientSecret={clientSecret} />
+                    </Elements>
+                </div>
+            )}
         </div>
     );
 }
