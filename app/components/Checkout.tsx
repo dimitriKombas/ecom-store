@@ -5,6 +5,9 @@ import { useCartStore } from "@/store"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import CheckoutForm from "./CheckoutForm"
+import OrderAnimation from "./OrderAnimation"
+import { motion } from "framer-motion"
+import { useThemeStore } from "@/store"
 // import { signIn } from 'next-auth/react';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
@@ -13,8 +16,16 @@ export default function Checkout() {
     const cartStore = useCartStore();
     const router = useRouter();
     const [clientSecret, setClientSecret] = useState("");
+    const themeStore = useThemeStore()
+    const [stripeTheme, setStripeTheme] = useState<"flat" | "stripe" | "night" | "none">("stripe")
 
     useEffect(() => {
+        // Set the them of stripe
+        if (themeStore.mode === "light") {
+            setStripeTheme("stripe")
+        } else {
+            setStripeTheme("night")
+        }
         // Create a paymentIntent as soon as the page loads up
         fetch('/api/create-payment-intent', {
             method: "POST",
@@ -38,20 +49,21 @@ export default function Checkout() {
     const options: StripeElementsOptions = {
         clientSecret,
         appearance: {
-            theme: "night",
+            theme: stripeTheme,
             labels: "floating",
-        }
+        },
     }
 
     // Return some JSX, even if it's just a placeholder for now.
     return (
         <div>
+            {!clientSecret && <OrderAnimation />}
             {clientSecret && (
-                <div>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
                     <Elements options={options} stripe={stripePromise}>
                         <CheckoutForm clientSecret={clientSecret} />
                     </Elements>
-                </div>
+                </motion.div>
             )}
         </div>
     );

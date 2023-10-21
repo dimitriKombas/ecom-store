@@ -34,7 +34,10 @@ export default function AddCart({
             {/* Button to add the product to the cart. */}
             <button
                 onClick={handleAddToCart}
-                className="my-12 text-white py-2 px-6 font-medium rounded-md bg-teal-700">Add to cart
+                disabled={added}
+                className="my-4 btn-primary rounded-md w-full h-fit">
+                {!added && <span>Add to cart</span>}
+                {added && <span>Adding to cart 🤩</span>}
             </button>
         </>
     )
