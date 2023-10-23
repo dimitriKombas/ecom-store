@@ -8,10 +8,9 @@ import { motion } from "framer-motion"
 export default function Dashboard() {
     const [orders, setOrders] = useState(null)
     const [loading, setLoading] = useState(true)
-    // const [error, setError] = useState(null)
-    const [error, setError] = useState<Error | null>(null);
+    const [error, setError] = useState(null)
     const fetchOrders = async () => {
-        const res = await fetch("/api/get-orders")
+        const res = await fetch("/api/auth/get-orders")
         const data = await res.json()
         return data
     }
@@ -22,14 +21,13 @@ export default function Dashboard() {
                 setLoading(false)
             })
             .catch((err) => {
-                // setError(err)
-                setError(new Error(err.message || "An unknown error occurred"));
+                setError(err)
                 setLoading(false)
             })
     }, [])
     console.log(orders)
     if (loading) return <p>Loading...</p>
-    if (error) return <p>Error: {error.message}</p>
+    if (error) return <p>Error: {error}</p>
     return (
         <motion.div layout>
             <motion.div layout initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -52,7 +50,7 @@ export default function Dashboard() {
                         <p className="text-xs">
                             Time: {new Date(order.createdDate).toString()}
                         </p>
-                        <div className="text-sm lg:flex items-center gap-4">
+                        <div className="text-sm lg:flex items-center  gap-4">
                             {order.products.map((product) => (
                                 <div className="py-2" key={product.id}>
                                     <h2 className="py-2">{product.name}</h2>
