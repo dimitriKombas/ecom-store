@@ -61,7 +61,7 @@ export default function Nav({ user }: Session) {
                             />
                             <ul tabIndex={0} className="dropdown-content menu p-4 space-y-4 shadow bg-base-100 rounded-box w-72">
                                 <Link
-                                    className="hover:bg-base-300 p-4 rounded-md"
+                                    className="bg-slate-100 hover:bg-base-300 p-4 rounded-md"
                                     href={'/dashboard'}
                                     onClick={() => {
                                         if (document.activeElement instanceof HTMLElement) {
@@ -80,7 +80,7 @@ export default function Nav({ user }: Session) {
                                         }
                                     }
                                     }
-                                    className="hover:bg-base-300 p-4 rounded-md"
+                                    className="bg-slate-100 hover:bg-base-300 p-4 rounded-md"
                                 >
                                     Sign out
                                 </li>
