@@ -4,8 +4,9 @@ import Nav from "./components/Nav"
 import Hydrate from "./components/Hydrate"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
+import Footer from "./components/Footer"
 
-//Define main font
+// Define main font
 const roboto = Roboto({
   weight: ["400", "500", "700"],
   subsets: ["latin"],
@@ -34,8 +35,13 @@ export default async function RootLayout({
   return (
     <html className={`${roboto.variable} ${lobster.variable}  `} lang="en">
       <Hydrate>
-        <Nav user={session?.user} expires={session?.expires as string} />
-        {children}
+        <div className="flex flex-col min-h-screen w-full">
+          <Nav user={session?.user} expires={session?.expires as string} />
+          <div className="flex-grow">
+            {children}
+          </div>
+          <Footer />
+        </div>
       </Hydrate>
     </html>
   )

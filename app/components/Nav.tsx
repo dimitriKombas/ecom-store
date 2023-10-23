@@ -13,26 +13,36 @@ import DarkLight from "./DarkLight"
 // Define the Nav component.
 export default function Nav({ user }: Session) {
     const cartStore = useCartStore()
+    // Calculate the total quantity of all items in the cart.
+    const totalQuantity = cartStore.cart.reduce((acc, item) => acc + item.quantity!, 0);
+
     return (
         <nav
             className="flex justify-between items-center py-12">
-            <Link href={"/"}>
-                <h1 className="font-lobster text-2xl">Fulllstack React Project | My Ecom store</h1>
+            <Link href={"/"} className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 space-x-0 sm:space-x-5 items-center sm:items-start py-12">
+                <motion.h1
+                    initial={{ opacity: 0, x: '-100%' }}
+                    animate={{ opacity: 1, x: '0%' }}
+                    transition={{ delay: 0.8 }}
+                    className="font-lobster text-2xl"
+                >
+                    iMarketHub
+                </motion.h1>
             </Link>
-            <ul className="flex items-center gap-8">
+            <ul className="flex items-center gap-8 sm:gap-4">
                 {/* Toggle the cart */}
                 <li
                     onClick={() => cartStore.toggleCart()}
                     className="flex items-center text-3xl relative cursor-pointer">
                     <AiFillShopping />
                     <AnimatePresence>
-                        {cartStore.cart.length > 0 && (
+                        {totalQuantity > 0 && (
                             <motion.span
                                 animate={{ scale: 1 }}
                                 initial={{ scale: 0 }}
                                 exit={{ scale: 0 }}
                                 className="bg-primary text-white text-sm font-bold w-5 h-5 rounded-full absolute left-4 bottom-4 flex items-center justify-center">
-                                {cartStore.cart.length}
+                                {totalQuantity}
                             </motion.span>
                         )}
                     </AnimatePresence>
@@ -51,14 +61,15 @@ export default function Nav({ user }: Session) {
                 {user && (
                     <li>
                         <div className="dropdown dropdown-end cursor-pointer">
-                            <Image
-                                src={user?.image as string}
-                                alt={user.name as string}
-                                width={36}
-                                height={36}
-                                className="rounded-full"
-                                tabIndex={0}
-                            />
+                            <div className="relative w-8 h-8 sm:w-12 sm:h-12">
+                                <Image
+                                    src={user?.image as string}
+                                    alt={user.name as string}
+                                    layout="fill"
+                                    className="rounded-full object-cover"
+                                    tabIndex={0}
+                                />
+                            </div>
                             <ul tabIndex={0} className="dropdown-content menu p-4 space-y-4 shadow bg-base-100 rounded-box w-72">
                                 <Link
                                     className="bg-slate-100 hover:bg-base-300 p-4 rounded-md"

@@ -23,7 +23,7 @@ export default function Cart() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => cartStore.toggleCart()}
-            className="fixed w-full h-screen left-0 top-0 bg-black/25"
+            className="fixed w-full h-screen left-0 top-0 bg-black/25 z-50"
         >
             {/* Cart */}
             <motion.div
@@ -34,7 +34,7 @@ export default function Cart() {
                 {cartStore.onCheckout === "cart" && (
                     <button
                         onClick={() => cartStore.toggleCart()}
-                        className="text-sm font-bold pb-12"
+                        className="py-2 px-4 mt-4 text-sm font-bold bg-primary hover:bg-primary-dark transition duration-300 ease-in-out shadow-md rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
                     >
                         Back to store 🏃
                     </button>
@@ -42,7 +42,7 @@ export default function Cart() {
                 {cartStore.onCheckout === "checkout" && (
                     <button
                         onClick={() => cartStore.setCheckout("cart")}
-                        className="text-sm font-bold pb-12"
+                        className="py-2 px-4 mt-4 text-sm font-bold bg-primary hover:bg-primary-dark transition duration-300 ease-in-out shadow-md rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
                     >
                         Check your cart 🛒
                     </button>
@@ -54,10 +54,11 @@ export default function Cart() {
                             <motion.div
                                 layout
                                 key={item.id}
-                                className="flex p-4 gap-4 bg-base-100 my-4 rounded-lg "
+                                className="flex p-4 gap-4 bg-base-100 my-4 rounded-lg items-center"
                             >
                                 <Image
-                                    className="rounded-md h-24"
+                                    className="rounded-md object-cover"
+                                    // src={item.image || '/path/to/default/image.png'}
                                     src={item.image}
                                     alt={item.name}
                                     width={120}
@@ -95,7 +96,6 @@ export default function Cart() {
                                             <IoAddCircle />
                                         </button>
                                     </div>
-
                                     <p className="text-sm">
                                         {item.unit_amount && formatPrice(item.unit_amount)}
                                     </p>

@@ -1,28 +1,30 @@
-import Image from "next/image"
-import formatPrice from "../util/PriceFormat"
-import { ProductType } from "../types/ProductType"
-import { metadata } from "../layout"
-import Link from "next/link"
+import Image from "next/image";
+import formatPrice from "../util/PriceFormat";
+import { ProductType } from "../types/ProductType";
+import Link from "next/link";
 
 export default function Product({ name, image, unit_amount, id, description, metadata }: ProductType) {
-    const { features } = metadata
+    const { features } = metadata;
+
     return (
-        <Link href={{ pathname: `/product/${id}`, query: { name, image, unit_amount, id, description, features }, }}>
-            <div>
-                <Image
-                    src={image}
-                    alt={name}
-                    width={300}
-                    height={450}
-                    className="w-500 h-96 object-cover rounded-lg"
-                />
-                <div className="font-medium py-2">
-                    <h1> {name}</h1>
+        <Link href={{ pathname: `/product/${id}`, query: { name, image, unit_amount, id, description, features } }}>
+            <div className="flex flex-col items-center p-4 border border-primary rounded-xl transition-shadow hover:shadow-2xl cursor-pointer">
+                <div className="w-64 h-64 relative overflow-hidden rounded-xl">
+                    <Image
+                        src={image}
+                        alt={name}
+                        fill
+                        objectFit="contain"  // Ensure the image fits inside the box
+                        className="w-full h-full "
+                    />
+                </div>
+                <div className="font-medium py-2 text-center w-full">
+                    <h1 className="truncate">{name}</h1>
                     <h2 className="text-sm text-primary">
                         {unit_amount && formatPrice(unit_amount)}
                     </h2>
-                </div >
-            </div >
-        </Link >
-    )
+                </div>
+            </div>
+        </Link>
+    );
 }

@@ -35,7 +35,7 @@ export default function AddCart({
             <button
                 onClick={handleAddToCart}
                 disabled={added}
-                className="my-4 btn-primary rounded-md w-full h-fit">
+                className="py-2 mt-4 bg-primary w-full rounded-md text-white">
                 {!added && <span>Add to cart</span>}
                 {added && <span>Adding to cart 🤩</span>}
             </button>
