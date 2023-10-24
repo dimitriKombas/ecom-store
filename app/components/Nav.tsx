@@ -18,8 +18,8 @@ export default function Nav({ user }: Session) {
 
     return (
         <nav
-            className="flex justify-between items-center py-12">
-            <Link href={"/"} className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 space-x-0 sm:space-x-5 items-center sm:items-start py-12">
+            className="flex justify-between items-center py-8 mt-1">
+            <Link href={"/"} className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 space-x-0 sm:space-x-5 items-center sm:items-start py-25">
                 <motion.h1
                     initial={{ opacity: 0, x: '-100%' }}
                     animate={{ opacity: 1, x: '0%' }}
@@ -70,16 +70,15 @@ export default function Nav({ user }: Session) {
                                     tabIndex={0}
                                 />
                             </div>
-                            <ul tabIndex={0} className="dropdown-content menu p-4 space-y-4 shadow bg-base-100 rounded-box w-72">
+                            <ul tabIndex={0} className="dropdown-content menu p-4 space-y-4 shadow bg-opacity-70 bg-base-100 rounded-box w-72 z-50">
                                 <Link
-                                    className="bg-slate-100 hover:bg-base-300 p-4 rounded-md"
+                                    className="bg-opacity-70 hover:bg-opacity-100 bg-base-100 p-5 rounded-md"
                                     href={'/dashboard'}
                                     onClick={() => {
                                         if (document.activeElement instanceof HTMLElement) {
                                             document.activeElement.blur()
                                         }
-                                    }
-                                    }
+                                    }}
                                 >
                                     Orders
                                 </Link>
@@ -89,13 +88,13 @@ export default function Nav({ user }: Session) {
                                         if (document.activeElement instanceof HTMLElement) {
                                             document.activeElement.blur()
                                         }
-                                    }
-                                    }
-                                    className="bg-slate-100 hover:bg-base-300 p-4 rounded-md"
+                                    }}
+                                    className="bg-opacity-70 hover:bg-opacity-100 bg-base-100 p-5 rounded-md"
                                 >
                                     Sign out
                                 </li>
                             </ul>
+
                         </div>
                     </li>
                 )}

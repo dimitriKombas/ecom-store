@@ -4,10 +4,11 @@ import Image from "next/image"
 import { useCartStore } from "@/store"
 import formatPrice from "../util/PriceFormat"
 import { IoAddCircle, IoRemoveCircle } from "react-icons/io5"
-import basket from "@/public/basket.png"
 import { motion, AnimatePresence } from "framer-motion"
 import Checkout from "./Checkout"
 import OrderConfirmed from "./OrderConfirmed"
+import { Player } from "@lottiefiles/react-lottie-player";
+import basket from "@/public/basket.json";
 
 export default function Cart() {
     const cartStore = useCartStore()
@@ -42,7 +43,7 @@ export default function Cart() {
                 {cartStore.onCheckout === "checkout" && (
                     <button
                         onClick={() => cartStore.setCheckout("cart")}
-                        className="py-2 px-4 mt-4 text-sm font-bold bg-primary hover:bg-primary-dark transition duration-300 ease-in-out shadow-md rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+                        className="py-2 px-4 mt-4 mb-4 text-sm font-bold bg-primary hover:bg-primary-dark transition duration-300 ease-in-out shadow-md rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
                     >
                         Check your cart 🛒
                     </button>
@@ -127,8 +128,13 @@ export default function Cart() {
                             exit={{ scale: 0.5, rotateZ: -10, opacity: 0 }}
                             className="flex flex-col items-center gap-12 text-2xl font-medium pt-56 opacity-75"
                         >
-                            <h1>Uhhh ohhh...it's empty 😢</h1>
-                            <Image src={basket} alt="empty cart" width={200} height={200} />
+                            <h1>Your basket is empty 😢</h1>
+                            <Player
+                                autoplay
+                                loop
+                                src={basket}
+                                style={{ width: "350px", height: "350px" }}
+                            ></Player>
                         </motion.div>
                     )}
                 </AnimatePresence>
