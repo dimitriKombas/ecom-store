@@ -26,20 +26,6 @@ module.exports = {
 
   plugins: [
     require("daisyui"),
-
-    // Insert the function here
-    function ({ addUtilities }) {
-      const newUtilities = {
-        '.shadow-white': {
-          boxShadow: '0 4px 6px rgba(255, 255, 255, 0.05), 0 1px 3px rgba(255, 255, 255, 0.04) !important',
-        },
-        '.hover\\:shadow-white-2xl:hover': {
-          boxShadow: '0 10px 15px rgba(255, 255, 255, 0.1), 0 4px 6px rgba(255, 255, 255, 0.07) !important',
-        },
-      };
-
-      addUtilities(newUtilities, ['responsive', 'hover']);
-    },
   ],
 
   daisyui: {
