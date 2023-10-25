@@ -3,21 +3,18 @@ import Image from 'next/image';
 import { SearchParamTypes } from "@/app/types/SearchParamTypes";
 import formatPrice from "@/app/util/PriceFormat";
 import AddCart from "./AddCart";
+import { IoArrowBackCircle } from 'react-icons/io5';
 
 export default function Product({ searchParams }: SearchParamTypes) {
     return (
         <div>
-            {/* <div className="mb-0">
+            <div className="mb-0">
                 <Link href="/">
-                    <button className="py-1 px-2 mt-2 text-sm font-bold bg-primary transition-transform transform duration-300 hover:scale-105 hover:shadow-lg ease-in-out shadow-md rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
-                    >
-                        X
-                    </button>
-
+                    <IoArrowBackCircle size="3em" />
                 </Link>
-            </div> */}
+            </div>
 
-            <div className="relative flex flex-col 2xl:flex-row items-center justify-between gap-0 lg:gap-16 md:gap-0 mt-14 sm:mt-12">
+            <div className="relative flex flex-col 2xl:flex-row items-center justify-between gap-0 lg:gap-16 md:gap-0 mt-10 sm:mt-12">
                 <div className="w-full md:w-3/4 lg:w-1/2 2xl:w-full md:max-w-[500px] mx-auto">
                     <Image
                         src={searchParams.image}
