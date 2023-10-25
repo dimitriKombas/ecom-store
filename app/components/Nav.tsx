@@ -15,21 +15,26 @@ export default function Nav({ user }: Session) {
     const cartStore = useCartStore()
     // Calculate the total quantity of all items in the cart.
     const totalQuantity = cartStore.cart.reduce((acc, item) => acc + item.quantity!, 0);
-
     return (
         <nav
             className="flex justify-between items-center py-8 mt-1">
-            <Link href={"/"} className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 space-x-0 sm:space-x-5 items-center sm:items-start py-25">
-                <motion.h1
-                    initial={{ opacity: 0, x: '-100%' }}
-                    animate={{ opacity: 1, x: '0%' }}
-                    transition={{ delay: 0.8 }}
-                    className="font-lobster text-2xl"
-                >
-                    iMarketHub
-                </motion.h1>
-            </Link>
-            <ul className="flex items-center gap-8 sm:gap-4">
+            <motion.div
+                initial={{ opacity: 0, x: '-100%' }}
+                animate={{ opacity: 1, x: '0%' }}
+                transition={{ delay: 0.8 }}
+            >
+                <Link href="/">
+                    <motion.div
+                        initial={{ opacity: 0, x: '-100%' }}
+                        animate={{ opacity: 1, x: '0%' }}
+                        transition={{ delay: 0.8 }}
+                        className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 space-x-0 sm:space-x-5 items-center sm:items-start py-25"
+                    >
+                        <h1 className="font-lobster text-2xl">iMarketHub</h1>
+                    </motion.div>
+                </Link>
+            </motion.div>
+            <ul className="flex items-center gap-4 sm:gap-4 lg:gap-8">
                 {/* Toggle the cart */}
                 <li
                     onClick={() => cartStore.toggleCart()}

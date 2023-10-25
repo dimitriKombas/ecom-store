@@ -35,7 +35,7 @@ export default function Cart() {
                 {cartStore.onCheckout === "cart" && (
                     <button
                         onClick={() => cartStore.toggleCart()}
-                        className="py-2 px-4 mt-4 text-sm font-bold bg-primary hover:bg-primary-dark transition duration-300 ease-in-out shadow-md rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+                        className="py-2 px-4 mt-4 text-sm font-bold bg-primary transition-transform transform duration-300 hover:scale-105 hover:shadow-lg ease-in-out shadow-md rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
                     >
                         Back to store 🏃
                     </button>
@@ -43,7 +43,7 @@ export default function Cart() {
                 {cartStore.onCheckout === "checkout" && (
                     <button
                         onClick={() => cartStore.setCheckout("cart")}
-                        className="py-2 px-4 mt-4 mb-4 text-sm font-bold bg-primary hover:bg-primary-dark transition duration-300 ease-in-out shadow-md rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+                        className="py-2 px-4 mt-4 mb-4 text-sm font-bold bg-primary transition-transform transform duration-300 hover:scale-105 hover:shadow-lg ease-in-out shadow-md rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
                     >
                         Check your cart 🛒
                     </button>
@@ -111,7 +111,7 @@ export default function Cart() {
                         <p>Total: {formatPrice(totalPrice)}</p>
                         <button
                             onClick={() => cartStore.setCheckout("checkout")}
-                            className="py-2 mt-4 bg-primary w-full rounded-md text-white"
+                            className=" w-full py-2 px-4 mt-4 mb-4 text-sm font-bold bg-primary transition-transform transform duration-300 hover:scale-105 hover:shadow-lg ease-in-out shadow-md rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
                         >
                             Checkout
                         </button>
@@ -126,7 +126,7 @@ export default function Cart() {
                             animate={{ scale: 1, rotateZ: 0, opacity: 0.75 }}
                             initial={{ scale: 0.5, rotateZ: -10, opacity: 0 }}
                             exit={{ scale: 0.5, rotateZ: -10, opacity: 0 }}
-                            className="flex flex-col items-center gap-12 text-2xl font-medium pt-56 opacity-75"
+                            className="flex flex-col items-center gap-3 text-2xl font-medium pt-40 opacity-75 sm:pt-32 sm:gap-1"
                         >
                             <h1>Your cart is empty 😢</h1>
                             <Player

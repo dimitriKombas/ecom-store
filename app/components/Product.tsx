@@ -9,7 +9,7 @@ import { useThemeStore } from "@/store";  // Update path accordingly.
 export default function Product({ name, image, unit_amount, id, description, metadata }: ProductType) {
     const { features } = metadata;
     const mode = useThemeStore((state) => state.mode);
-    const shadowColor = mode === "dark" ? "shadow-lg shadow-blue-300 hover:shadow-2xl" : "shadow-lg hover:shadow-2xl";
+    const shadowColor = mode === "dark" ? "shadow-lg shadow-blue-200" : "shadow-lg hover:shadow-2xl";
 
     return (
         <div className={`mb-20 flex flex-col items-center bg-neutral-10 rounded-xl transition-shadow cursor-pointer ${shadowColor}`}>

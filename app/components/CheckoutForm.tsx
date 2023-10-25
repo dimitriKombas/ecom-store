@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import formatPrice from "../util/PriceFormat"
 import { useCartStore } from "@/store"
+import { motion } from "framer-motion"
 
 export default function CheckoutForm({ clientSecret }: { clientSecret: string }) {
 
@@ -15,6 +16,8 @@ export default function CheckoutForm({ clientSecret }: { clientSecret: string })
         return acc + item.unit_amount! * item.quantity!
     }, 0)
     const formattedPrice = formatPrice(totalPrice)
+    const [isFormComplete, setIsFormComplete] = useState(false);
+
 
     useEffect(() => {
         if (!stripe) {
@@ -46,16 +49,24 @@ export default function CheckoutForm({ clientSecret }: { clientSecret: string })
 
     return (
         <form onSubmit={handleSubmit} id="payment-form">
-            <PaymentElement id="payment-element" options={{ layout: "tabs" }} />
+            <PaymentElement
+                id="payment-element"
+                options={{ layout: "tabs" }}
+                onChange={(event) => {
+                    setIsFormComplete(event.complete);
+                }}
+            />
             <h1 className="py-4 text-sm font-bold">Total: {formattedPrice}</h1>
-            <button
+            <motion.button
+                whileHover={isLoading || !stripe || !elements || !isFormComplete ? {} : { scale: 1.05, transition: { duration: 0.1 } }}
+                whileTap={isLoading || !stripe || !elements || !isFormComplete ? {} : { scale: 0.95, transition: { duration: 0.1 } }}
                 className={`py-2 mt-4 w-full bg-primary rounded-md text-white disabled:opacity-25`}
                 id="submit"
-                disabled={isLoading || !stripe || !elements}>
+                disabled={isLoading || !stripe || !elements || !isFormComplete}>
                 <span id="button-text">
                     {isLoading ? <span>Processing ...</span> : <span>Pay now 🔥</span>}
                 </span>
-            </button>
+            </motion.button>
         </form>
-    )
+    );
 }
