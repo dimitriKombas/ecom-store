@@ -48,7 +48,10 @@ export default function CheckoutForm({ clientSecret }: { clientSecret: string })
     }
 
     return (
-        <><h1 className="text-lg font-bold py-2 text-center text-purple-950 bg-yellow-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out animate-pulse mb-4">Testing Tip! Spam 4242 to simulate a valid card</h1>
+        <>
+            <h1 className="text-xs sm:text-lg font-bold py-2 text-center text-purple-950 bg-yellow-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out animate-pulse mb-4">
+                🧪 Testing tip! Fill 4242 4242 4242 4242
+            </h1>
             <form onSubmit={handleSubmit} id="payment-form">
                 <PaymentElement
                     id="payment-element"
@@ -67,6 +70,7 @@ export default function CheckoutForm({ clientSecret }: { clientSecret: string })
                         {isLoading ? <span>Processing ...</span> : <span>Pay now 🔥</span>}
                     </span>
                 </motion.button>
-            </form></>
+            </form>
+        </>
     );
 }
