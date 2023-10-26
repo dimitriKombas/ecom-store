@@ -9,6 +9,7 @@ import { useCartStore } from "@/store"
 import { AiFillShopping } from "react-icons/ai"
 import { AnimatePresence, motion } from "framer-motion"
 import DarkLight from "./DarkLight"
+import applelogo from "@/public/applelogo.png";
 
 // Define the Nav component.
 export default function Nav({ user }: Session) {
@@ -28,9 +29,16 @@ export default function Nav({ user }: Session) {
                         initial={{ opacity: 0, x: '-100%' }}
                         animate={{ opacity: 1, x: '0%' }}
                         transition={{ delay: 0.8 }}
-                        className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 space-x-0 sm:space-x-5 items-center sm:items-start py-25"
+                        className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 space-x-0 sm:space-x-2 items-center py-25" // Adjusted classes
                     >
-                        <h1 className="font-lobster text-2xl">iMarketHub</h1>
+                        <Image
+                            src={applelogo}
+                            alt="Logo Image"
+                            width={50}
+                            height={50}
+                            className="mr-0"
+                        />
+                        <h1 className="font-lobster text-2xl ml-0">iMarketHub</h1>
                     </motion.div>
                 </Link>
             </motion.div>

@@ -48,25 +48,25 @@ export default function CheckoutForm({ clientSecret }: { clientSecret: string })
     }
 
     return (
-        <form onSubmit={handleSubmit} id="payment-form">
-            <PaymentElement
-                id="payment-element"
-                options={{ layout: "tabs" }}
-                onChange={(event) => {
-                    setIsFormComplete(event.complete);
-                }}
-            />
-            <h1 className="py-4 text-sm font-bold">Total: {formattedPrice}</h1>
-            <motion.button
-                whileHover={isLoading || !stripe || !elements || !isFormComplete ? {} : { scale: 1.05, transition: { duration: 0.1 } }}
-                whileTap={isLoading || !stripe || !elements || !isFormComplete ? {} : { scale: 0.95, transition: { duration: 0.1 } }}
-                className={`py-2 mt-4 w-full bg-primary rounded-md text-white disabled:opacity-25`}
-                id="submit"
-                disabled={isLoading || !stripe || !elements || !isFormComplete}>
-                <span id="button-text">
-                    {isLoading ? <span>Processing ...</span> : <span>Pay now 🔥</span>}
-                </span>
-            </motion.button>
-        </form>
+        <><h1 className="text-lg font-bold py-2 text-center text-purple-950 bg-yellow-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out animate-pulse mb-4">Testing Tip! Spam 4242 to simulate a valid card</h1>
+            <form onSubmit={handleSubmit} id="payment-form">
+                <PaymentElement
+                    id="payment-element"
+                    options={{ layout: "tabs" }}
+                    onChange={(event) => {
+                        setIsFormComplete(event.complete)
+                    }} />
+                <h1 className="py-4 text-sm font-bold">Total: {formattedPrice}</h1>
+                <motion.button
+                    whileHover={isLoading || !stripe || !elements || !isFormComplete ? {} : { scale: 1.05, transition: { duration: 0.1 } }}
+                    whileTap={isLoading || !stripe || !elements || !isFormComplete ? {} : { scale: 0.95, transition: { duration: 0.1 } }}
+                    className={`py-2 mt-4 w-full bg-primary rounded-md text-white disabled:opacity-25`}
+                    id="submit"
+                    disabled={isLoading || !stripe || !elements || !isFormComplete}>
+                    <span id="button-text">
+                        {isLoading ? <span>Processing ...</span> : <span>Pay now 🔥</span>}
+                    </span>
+                </motion.button>
+            </form></>
     );
 }
