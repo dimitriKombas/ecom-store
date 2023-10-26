@@ -30,7 +30,7 @@ export default function Nav({ user }: Session) {
                         initial={{ opacity: 0, x: '-100%' }}
                         animate={{ opacity: 1, x: '0%' }}
                         transition={{ delay: 0.8 }}
-                        className="flex items-center space-x-2 cursor-pointer hover:scale-105 transition-transform transform duration-300 ease-in-out"
+                        className="flex items-center space-x-2 cursor-pointer"
                     >
                         <Image
                             src={applelogo}
