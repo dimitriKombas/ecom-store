@@ -41,10 +41,14 @@ export default function OrderConfirmed() {
 
                 <div className="flex items-center justify-center gap-12">
                     <Link href={"/dashboard"}>
-                        <button onClick={checkoutOrder} className="font-medium">
+                        <button
+                            onClick={checkoutOrder}
+                            className="py-2 px-4 mt-4 text-sm font-bold bg-primary transition-transform transform duration-300 hover:scale-105 hover:shadow-lg ease-in-out shadow-md rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+                        >
                             Check your Order
                         </button>
                     </Link>
+
                 </div>
             </div>
         </motion.div>
