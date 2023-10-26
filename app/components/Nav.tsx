@@ -23,22 +23,23 @@ export default function Nav({ user }: Session) {
                 initial={{ opacity: 0, x: '-100%' }}
                 animate={{ opacity: 1, x: '0%' }}
                 transition={{ delay: 0.8 }}
+                className="flex items-center space-x-2"
             >
                 <Link href="/">
                     <motion.div
                         initial={{ opacity: 0, x: '-100%' }}
                         animate={{ opacity: 1, x: '0%' }}
                         transition={{ delay: 0.8 }}
-                        className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 space-x-0 sm:space-x-2 items-center py-25" // Adjusted classes
+                        className="flex items-center space-x-2 cursor-pointer hover:scale-105 transition-transform transform duration-300 ease-in-out"
                     >
                         <Image
                             src={applelogo}
                             alt="Logo Image"
-                            width={50}
-                            height={50}
-                            className="mr-0"
+                            width={40}
+                            height={40}
+                            className="w-10 h-10 sm:w-12 sm:h-12"
                         />
-                        <h1 className="font-lobster text-2xl ml-0">iMarketHub</h1>
+                        <h1 className="font-lobster text-xl sm:text-2xl">iMarketHub</h1>
                     </motion.div>
                 </Link>
             </motion.div>
