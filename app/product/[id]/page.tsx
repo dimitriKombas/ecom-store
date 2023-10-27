@@ -1,32 +1,16 @@
-"use client"
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { SearchParamTypes } from "@/app/types/SearchParamTypes";
 import formatPrice from "@/app/util/PriceFormat";
 import AddCart from "./AddCart";
 import { IoArrowBackCircle } from 'react-icons/io5';
-import { useEffect, useRef } from 'react';
 
 export default function Product({ searchParams }: SearchParamTypes) {
-    const arrowRef = useRef<HTMLDivElement | null>(null);
-
-    useEffect(() => {
-        if (arrowRef.current) {
-            arrowRef.current.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-            });
-        }
-    }, []);
     return (
         <div>
-            <div className="mb-0" ref={arrowRef}>
-                <Link href="/">
-                    <IoArrowBackCircle size="3em" />
-                </Link>
-            </div>
-
+            <Link href="/">
+                <IoArrowBackCircle size="3em" />
+            </Link>
             <div className="relative flex flex-col 2xl:flex-row items-center justify-between gap-0 lg:gap-16 md:gap-0 mt-10 sm:mt-12">
                 <div className="w-full md:w-3/4 lg:w-1/2 2xl:w-full md:max-w-[500px] mx-auto">
                     <Image
