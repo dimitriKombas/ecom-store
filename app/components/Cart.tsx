@@ -101,7 +101,7 @@ export default function Cart() {
                                                 cartStore.clearCart()
                                             }
                                         >
-                                            <IoCloseCircleSharp size={20} />
+                                            <IoCloseCircleSharp size={21} />
                                         </button>
                                     </div>
                                     <p className="text-sm">
