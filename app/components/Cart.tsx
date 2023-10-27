@@ -68,9 +68,9 @@ export default function Cart() {
                                 <div>
                                     <h2>{item.name}</h2>
                                     {/* Update quantity of a product */}
-                                    <div className="md:flex flex-wrap sm:gap-4 md:gap-2 lg:gap-2">
+                                    <div className="md:flex flex-wrap">
                                         <h2>Quantity: {item.quantity}</h2>
-                                        <button
+                                        <button className="pl-1 pr-2"
                                             onClick={() =>
                                                 cartStore.removeProduct({
                                                     id: item.id,
@@ -81,9 +81,9 @@ export default function Cart() {
                                                 })
                                             }
                                         >
-                                            <IoRemoveCircle size={20} />
+                                            <IoRemoveCircle size={21} />
                                         </button>
-                                        <button
+                                        <button className="pr-2"
                                             onClick={() =>
                                                 cartStore.addProduct({
                                                     id: item.id,
@@ -94,7 +94,7 @@ export default function Cart() {
                                                 })
                                             }
                                         >
-                                            <IoAddCircle size={20} />
+                                            <IoAddCircle size={21} />
                                         </button>
                                         <button
                                             onClick={() =>
