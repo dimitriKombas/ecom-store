@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { useCartStore } from "@/store"
 import formatPrice from "../util/PriceFormat"
-import { IoAddCircle, IoRemoveCircle } from "react-icons/io5"
+import { IoAddCircle, IoRemoveCircle, IoCloseCircleSharp } from "react-icons/io5"
 import { motion, AnimatePresence } from "framer-motion"
 import Checkout from "./Checkout"
 import OrderConfirmed from "./OrderConfirmed"
@@ -68,7 +68,7 @@ export default function Cart() {
                                 <div>
                                     <h2>{item.name}</h2>
                                     {/* Update quantity of a product */}
-                                    <div className="flex gap-2">
+                                    <div className="md:flex flex-wrap sm:gap-4 md:gap-2 lg:gap-2">
                                         <h2>Quantity: {item.quantity}</h2>
                                         <button
                                             onClick={() =>
@@ -81,7 +81,7 @@ export default function Cart() {
                                                 })
                                             }
                                         >
-                                            <IoRemoveCircle />
+                                            <IoRemoveCircle size={20} />
                                         </button>
                                         <button
                                             onClick={() =>
@@ -94,7 +94,14 @@ export default function Cart() {
                                                 })
                                             }
                                         >
-                                            <IoAddCircle />
+                                            <IoAddCircle size={20} />
+                                        </button>
+                                        <button
+                                            onClick={() =>
+                                                cartStore.clearCart()
+                                            }
+                                        >
+                                            <IoCloseCircleSharp size={20} />
                                         </button>
                                     </div>
                                     <p className="text-sm">
